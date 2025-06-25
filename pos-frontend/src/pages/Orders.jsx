@@ -252,7 +252,7 @@ const Orders = () => {
         ) || [];
 
   return (
-    <section className="bg-[#1f1f1f] min-h-[calc(100vh-5rem)] overflow-y-auto pb-20">
+    <section className="bg-[#1b2130] min-h-[calc(100vh-5rem)] overflow-y-auto pb-20">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 sm:px-6 lg:px-10 py-4 gap-4">
         <div className="flex items-center gap-4">
           <BackButton />

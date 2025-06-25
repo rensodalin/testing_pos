@@ -38,28 +38,28 @@ const BottomNav = () => {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
+    <div className="fixed bottom-0 left-0 right-0 bg-[#202d3f] p-2 h-16 flex justify-around">
       <button
         onClick={() => navigate("/")}
         className={`flex items-center justify-center font-bold ${
-          isActive("/") ? "text-[#f5f5f5] bg-[#343434]" : "text-[#ababab]"
-        } w-[300px] rounded-[20px]`}
+          isActive("/") ? "text-[#f5f5f5] bg-[#233135]" : "text-[#ababab]"
+        } w-[300px] rounded-[15px]`}
       >
         <FaHome className="inline mr-2" size={20} /> <p>Home</p>
       </button>
       <button
         onClick={() => navigate("/orders")}
         className={`flex items-center justify-center font-bold ${
-          isActive("/orders") ? "text-[#f5f5f5] bg-[#343434]" : "text-[#ababab]"
-        } w-[300px] rounded-[20px]`}
+          isActive("/orders") ? "text-[#f5f5f5] bg-[#233135]" : "text-[#ababab]"
+        } w-[300px] rounded-[15px]`}
       >
         <MdOutlineReorder className="inline mr-2" size={20} /> <p>Orders</p>
       </button>
       <button
         onClick={() => navigate("/tables")}
         className={`flex items-center justify-center font-bold ${
-          isActive("/tables") ? "text-[#f5f5f5] bg-[#343434]" : "text-[#ababab]"
-        } w-[300px] rounded-[20px]`}
+          isActive("/tables") ? "text-[#f5f5f5] bg-[#233135]" : "text-[#ababab]"
+        } w-[300px] rounded-[15px]`}
       >
         <MdTableBar className="inline mr-2" size={20} /> <p>Tables</p>
       </button>
