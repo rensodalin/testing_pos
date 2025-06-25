@@ -256,7 +256,7 @@ const OrderCard = ({ order }) => {
   const itemsCount = order.items?.length || 0;
 
   return (
-    <div className="w-full bg-[#262626] p-3 sm:p-4 rounded-lg mb-4">
+    <div className="w-full bg-[#1e2c37] p-3 sm:p-4 rounded-lg mb-4">
       {/* Main Content */}
       <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-5">
         {/* Avatar */}
