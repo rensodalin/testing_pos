@@ -148,12 +148,15 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md"; // ✅ add this
+import { IoLogOut } from "react-icons/io5"; // you also use IoLogOut, make sure it's imported
 import logo from "../../assets/images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "../../https";
 import { removeUser } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
   const userData = useSelector((state) => state.user);
