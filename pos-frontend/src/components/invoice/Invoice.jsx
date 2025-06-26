@@ -4,6 +4,24 @@ import { FaCheck } from "react-icons/fa6";
 
 const Invoice = ({ orderInfo, setShowInvoice }) => {
   const invoiceRef = useRef(null);
+  
+  // Safety check for orderInfo
+  if (!orderInfo) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="bg-white p-4 rounded-lg shadow-lg w-[400px]">
+          <p className="text-center text-red-500">Order information not available</p>
+          <button
+            onClick={() => setShowInvoice(false)}
+            className="mt-4 w-full bg-red-500 text-white px-4 py-2 rounded-lg"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const handlePrint = () => {
     const printContent = invoiceRef.current.innerHTML;
     const WinPrint = window.open("", "", "width=900,height=650");
@@ -30,6 +48,17 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
       WinPrint.print();
       WinPrint.close();
     }, 1000);
+  };
+
+  // Generate Order ID safely
+  const generateOrderId = () => {
+    if (orderInfo._id) {
+      return orderInfo._id;
+    }
+    if (orderInfo.orderDate) {
+      return Math.floor(new Date(orderInfo.orderDate).getTime());
+    }
+    return Date.now();
   };
 
   return (
@@ -61,59 +90,58 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
           <p className="text-gray-600 text-center">Thank you for your order!</p>
 
           {/* Order Details */}
-
           <div className="mt-4 border-t pt-4 text-sm text-gray-700">
             <p>
-              <strong>Order ID:</strong>{" "}
-              {Math.floor(new Date(orderInfo.orderDate).getTime())}
+              <strong>Order ID:</strong> {generateOrderId()}
             </p>
             <p>
-              <strong>Name:</strong> {orderInfo.customerDetails.name}
+              <strong>Name:</strong> {orderInfo.customerDetails?.name || "N/A"}
             </p>
             <p>
-              <strong>Phone:</strong> {orderInfo.customerDetails.phone}
+              <strong>Phone:</strong> {orderInfo.customerDetails?.phone || "N/A"}
             </p>
             <p>
-              <strong>Guests:</strong> {orderInfo.customerDetails.guests}
+              <strong>Guests:</strong> {orderInfo.customerDetails?.guests || 0}
             </p>
           </div>
 
           {/* Items Summary */}
-
           <div className="mt-4 border-t pt-4">
             <h3 className="text-sm font-semibold">Items Ordered</h3>
             <ul className="text-sm text-gray-700">
-              {orderInfo.items.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex justify-between items-center text-xs"
-                >
-                  <span>
-                    {item.name} x{item.quantity}
-                  </span>
-                  <span>₹{item.price.toFixed(2)}</span>
-                </li>
-              ))}
+              {orderInfo.items && orderInfo.items.length > 0 ? (
+                orderInfo.items.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex justify-between items-center text-xs"
+                  >
+                    <span>
+                      {item.name} x{item.quantity}
+                    </span>
+                    <span>₹{item.price.toFixed(2)}</span>
+                  </li>
+                ))
+              ) : (
+                <li className="text-gray-500">No items found</li>
+              )}
             </ul>
           </div>
 
           {/* Bills Summary */}
-
           <div className="mt-4 border-t pt-4 text-sm">
             <p>
-              <strong>Subtotal:</strong> ₹{orderInfo.bills.total.toFixed(2)}
+              <strong>Subtotal:</strong> ₹{orderInfo.bills?.total?.toFixed(2) || "0.00"}
             </p>
             <p>
-              <strong>Tax:</strong> ₹{orderInfo.bills.tax.toFixed(2)}
+              <strong>Tax:</strong> ₹{orderInfo.bills?.tax?.toFixed(2) || "0.00"}
             </p>
             <p className="text-md font-semibold">
               <strong>Grand Total:</strong> ₹
-              {orderInfo.bills.totalWithTax.toFixed(2)}
+              {orderInfo.bills?.totalWithTax?.toFixed(2) || "0.00"}
             </p>
           </div>
 
           {/* Payment Details */}
-
           <div className="mb-2 mt-2 text-xs">
             {orderInfo.paymentMethod === "Cash" ? (
               <p>
@@ -124,14 +152,18 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
                 <p>
                   <strong>Payment Method:</strong> {orderInfo.paymentMethod}
                 </p>
-                <p>
-                  <strong>Razorpay Order ID:</strong>{" "}
-                  {orderInfo.paymentData?.razorpay_order_id}
-                </p>
-                <p>
-                  <strong>Razorpay Payment ID:</strong>{" "}
-                  {orderInfo.paymentData?.razorpay_payment_id}
-                </p>
+                {orderInfo.paymentData && (
+                  <>
+                    <p>
+                      <strong>Razorpay Order ID:</strong>{" "}
+                      {orderInfo.paymentData.razorpay_order_id || "N/A"}
+                    </p>
+                    <p>
+                      <strong>Razorpay Payment ID:</strong>{" "}
+                      {orderInfo.paymentData.razorpay_payment_id || "N/A"}
+                    </p>
+                  </>
+                )}
               </>
             )}
           </div>

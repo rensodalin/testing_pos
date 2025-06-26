@@ -7,7 +7,7 @@ const config = Object.freeze({
         port: process.env.DB_PORT || 3306,
         username: process.env.DB_USERNAME || "root",
         password: process.env.DB_PASSWORD || "",
-        database: process.env.DB_NAME || "pos_system",
+        database: process.env.DB_NAME || "test_pos",
         dialect: "mysql"
     },
     nodeEnv : process.env.NODE_ENV || "development",

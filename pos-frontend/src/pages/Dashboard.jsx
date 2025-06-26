@@ -104,7 +104,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-[#1f1f1f] min-h-[calc(100vh-5rem)] overflow-x-hidden">
+    <div className="bg-[#1b2130] min-h-[calc(100vh-5rem)] overflow-x-hidden">
       {/* Header with Back Button */}
       <div className="container mx-auto px-4 sm:px-6 pt-4 sm:pt-6">
         <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">

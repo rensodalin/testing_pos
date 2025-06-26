@@ -80,7 +80,7 @@ const Menu = () => {
   const customerData = useSelector((state) => state.customer);
 
   return (
-    <section className="bg-[#1f1f1f] min-h-screen overflow-y-auto flex gap-3">
+    <section className="bg-[#1b2130] min-h-screen overflow-y-auto flex gap-3">
       {/* Left Div */}
       <div className="flex-[3]">
         <div className="flex items-center justify-between px-10 py-4">
